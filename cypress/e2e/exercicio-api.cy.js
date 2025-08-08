@@ -39,10 +39,11 @@ beforeEach(() => {
         })
   });
 
-  it.only('Deve validar um usuário com email inválido - POST', () => {
+  it('Deve validar um usuário com email inválido - POST', () => {
         cy.request({
       method: 'POST',
       url: 'login',
+      failOnStatusCode: false,
       body: {
         "email": "emailInvalido@qa.com",
         "password": "teste"
@@ -50,7 +51,7 @@ beforeEach(() => {
     }).should((response) =>{
       expect(response.body.message).to.equal('Email e/ou senha inválidos')
       expect(response.status).to.equal(401)
-    }),
+    })
   });
 
 
